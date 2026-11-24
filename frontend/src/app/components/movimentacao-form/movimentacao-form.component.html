@@ -1,0 +1,14 @@
+<section class="panel form-panel">
+  <h2>{{ item ? 'Editar movimentação' : 'Nova movimentação' }}</h2>
+  <p class="muted">Preencha os dados da receita ou despesa.</p>
+  <form #form="ngForm" (ngSubmit)="enviar(form)">
+    <label>Descrição<input name="descricao" [(ngModel)]="dados.descricao" required maxlength="100" placeholder="Ex.: Mercado"></label>
+    <div class="form-grid">
+      <label>Tipo<select name="tipo" [(ngModel)]="dados.tipo" required><option value="receita">Receita</option><option value="despesa">Despesa</option></select></label>
+      <label>Categoria<select name="categoria" [(ngModel)]="dados.categoria" required>@for (categoria of categorias; track categoria) {<option [value]="categoria">{{ categoria }}</option>}</select></label>
+      <label>Valor (R$)<input name="valor" type="number" [(ngModel)]="dados.valor" min="0.01" max="999999999.99" step="0.01" required></label>
+      <label>Data<input name="data" type="date" [(ngModel)]="dados.data" required></label>
+    </div>
+    <div class="actions"><button class="primary" type="submit" [disabled]="form.invalid || !dados.descricao.trim() || ocupado">{{ ocupado ? 'Salvando...' : 'Salvar movimentação' }}</button><button type="button" class="secondary" (click)="cancelar.emit()" [disabled]="ocupado">Cancelar</button></div>
+  </form>
+</section>

@@ -1,0 +1,8 @@
+<section class="panel chart-panel">
+  <h2>Despesas por categoria</h2><p class="muted">Distribuição de todas as despesas cadastradas.</p>
+  @if (fatias.length) {
+    <div class="chart-layout"><div class="pie" [style.background]="fundo" role="img" aria-label="Gráfico de pizza das despesas, detalhado na legenda"></div>
+      <div class="legend">@for (fatia of fatias; track fatia.categoria) {<div class="legend-item"><span class="dot" [style.background]="fatia.cor"></span><span>{{ fatia.categoria }}<small>{{ fatia.valor | currency:'BRL' }}</small></span><strong>{{ fatia.percentual | number:'1.0-1' }}%</strong></div>}</div>
+    </div>
+  } @else { <div class="empty">Cadastre uma despesa para visualizar o gráfico.</div> }
+</section>
